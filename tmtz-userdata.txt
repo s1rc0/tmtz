@@ -1,0 +1,7 @@
+#!/bin/bash
+rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
+yum install -y puppet git wget
+puppet module install puppetlabs-mysql
+puppet module install hunner-wordpress
+git clone  https://github.com/s1rc0/tmtz.git /root/tmtz/
+puppet apply /root/tmtz/tmtz.pp
