@@ -44,8 +44,8 @@ yumrepo { 'nginx':
 ### Install PHP-FPM with modules and NGINX
 $php_packages = [ "php-fpm", "php-common", "php-cli", "php-pear", "php-pdo", "php-mysqlnd", "php-gd", "php-mbstring", "php-mcrypt", "php-xml" ]
 
-package { $php_packages: ensure => "installed", }
-package { 'nginx': ensure => "installed", }
+package { $php_packages: ensure => "installed", require => [ Yumrepo['remi'], Yumrepo['remi-php55'] ], }
+package { 'nginx': ensure => "installed", require => Yumrepo['nginx'], }
 
 ### Run and setting autoload nginx and php-fpm
 service { 'nginx':
