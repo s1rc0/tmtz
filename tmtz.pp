@@ -42,7 +42,7 @@ yumrepo { 'nginx':
 }
 
 ### Install PHP-FPM with modules and NGINX
-$php_packages = [ "php-fpm", "php-common", "php-opcache", "php-pecl-apcu", "php-cli", "php-pear", "php-pdo", "php-mysqlnd", "php-pgsql", "php-pecl-mongo", "php-pecl-sqlite", "php-pecl-memcache", "php-pecl-memcached", "php-gd", "php-mbstring", "php-mcrypt", "php-xml" ]
+$php_packages = [ "php-fpm", "php-common", "php-cli", "php-pear", "php-pdo", "php-mysqlnd", "php-gd", "php-mbstring", "php-mcrypt", "php-xml" ]
 
 package { $php_packages: ensure => "installed", }
 package { 'nginx': ensure => "installed", }
