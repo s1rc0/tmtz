@@ -60,7 +60,7 @@ file { '/etc/nginx/conf.d/default.conf':
   mode    => '0644',
   owner   => 'root',
   group   => 'root',
-  content => file('/root/default.conf'),
+  content => file('/root/tmtz/default.conf'),
   notify  => Service['nginx'],
   require => Package['nginx'],
 }
