@@ -1,14 +1,14 @@
 ### Install remi
 yumrepo { 'remi':
-  descr          => "Les RPM de remi pour Enterprise Linux ${::is_maj_version} - ${::architecture}",
-  mirrorlist     => "http://rpms.famillecollet.com/enterprise/${::os_maj_version}/remi/mirror",
+  descr          => "Les RPM de remi pour Enterprise Linux 7 - ${::architecture}",
+  mirrorlist     => "http://rpms.famillecollet.com/enterprise/7/remi/mirror",
   enabled        => '1',
   gpgcheck       => '0',
 }
 
 yumrepo { 'remi-php55':
-  descr          => "PHP 5.5 RPM repository for Enterprise Linux ${::is_maj_version} - ${::architecture}",
-  mirrorlist     => "http://rpms.famillecollet.com/enterprise/${::os_maj_version}/php55/mirror",
+  descr          => "PHP 5.5 RPM repository for Enterprise Linux 7 - ${::architecture}",
+  mirrorlist     => "http://rpms.famillecollet.com/enterprise/7/php55/mirror",
   enabled        => '1',
   gpgcheck       => '0',
 }
@@ -60,7 +60,7 @@ file { '/etc/nginx/conf.d/default.conf':
   mode    => '0644',
   owner   => 'root',
   group   => 'root',
-  content => file('/root/tmtz/default.conf'),
+  content => file('/root/default.conf'),
   notify  => Service['nginx'],
   require => Package['nginx'],
 }
