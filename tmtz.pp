@@ -97,6 +97,7 @@ class { 'mysql::server':
 #  client_package_name => 'mysql',
   package_name => 'mysql-community-server',
   service_name => 'mysqld',
+  require => [ Yumrepo['mysql-connectors-community'], Yumrepo['mysql-tools-community'], Yumrepo['mysql56-community'] ],
 }
 #include '::mysql::server'
 
