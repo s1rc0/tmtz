@@ -41,6 +41,26 @@ yumrepo { 'nginx':
   priority => 1,
 }
 
+### Install mysql repo
+yumrepo { 'mysql-connectors-community':
+  descr    => 'MySQL Connectors Community',
+  baseurl  => "http://repo.mysql.com/yum/mysql-connectors-community/el/7/\$basearch/",
+  enabled  => 1,
+  gpgcheck => 0,
+}
+yumrepo { 'mysql-tools-community':
+  descr    => 'MySQL Tools Community',
+  baseurl  => "http://repo.mysql.com/yum/mysql-tools-community/el/7/\$basearch/",
+  enabled  => 1,
+  gpgcheck => 0,
+}
+yumrepo { 'mysql56-community':
+  descr    => 'MySQL 5.6 Community Server',
+  baseurl  => "http://repo.mysql.com/yum/mysql-5.6-community/el/7/\$basearch/",
+  enabled  => 1,
+  gpgcheck => 0,
+}
+
 ### Install PHP-FPM with modules and NGINX
 $php_packages = [ "php-fpm", "php-common", "php-cli", "php-pear", "php-pdo", "php-mysqlnd", "php-gd", "php-mbstring", "php-mcrypt", "php-xml" ]
 
@@ -72,7 +92,13 @@ service { 'php-fpm':
 }
 
 ### Install mysql
-include '::mysql::server'
+
+class { 'mysql::server':
+#  client_package_name => 'mysql',
+  package_name => 'mysql-community-server',
+  service_name => 'mysqld',
+}
+#include '::mysql::server'
 
 ### Install WP
 class { 'wordpress':
@@ -82,3 +108,4 @@ class { 'wordpress':
   db_user     => 'tmtz',
   db_password => 'tmtz',
 }
+
