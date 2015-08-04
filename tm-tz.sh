@@ -13,13 +13,13 @@ instance_type=t2.micro
 load_balancer_name=tmtz
 lb_port=80
 instance_port=80
-avail_zones_elb="us-west-2a us-west-2b"
+avail_zones_elb="us-west-2a"
 lb_protocol="HTTP"
 instance_protocol="HTTP"
 
 
 ### AutoScaling Options
-asg_availability_zones="us-west-2a us-west-2b"
+asg_availability_zones="us-west-2a"
 asg_health_check_type=EC2
 asg_health_check_grace_period=120
 asg_min_size=1
@@ -30,7 +30,7 @@ asg_max_size=2
 ### Creates LaunchConfiguration and ELB (Return ELB URL)
 
 # Create ELB
-dns_hostname_elb=`aws elb create-load-balancer --load-balancer-name ${load_balancer_name} --listeners "Protocol=${lb_protocol},LoadBalancerPort=${lb_port},InstanceProtocol=${instance_protocol},Instance$
+dns_hostname_elb=`aws elb create-load-balancer --load-balancer-name ${load_balancer_name} --listeners "Protocol=${lb_protocol},LoadBalancerPort=${lb_port},InstanceProtocol=${instance_protocol},InstancePort=${instance_port}" --availability-zones=${avail_zones_elb}`
 
 # Create LaunchConfiguration
 aws autoscaling create-launch-configuration --launch-configuration-name ${launch_configuration_name} --image-id ${image_id} --key-name ${key_name} --security-groups ${security_groups} --instance-type ${instance_type} --user-data file://tmtz-userdata.txt
